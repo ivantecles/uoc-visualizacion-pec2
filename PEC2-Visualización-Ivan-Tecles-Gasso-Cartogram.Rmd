@@ -16,31 +16,23 @@ epsg_code <- 3857
 
 # African countries
 data(wrld_simpl)
-africa = wrld_simpl[wrld_simpl$REGION==2,]
+africa = wrld_simpl[wrld_simpl$REGION == 2,]
 
 # Construct a cartogram using the population in 2005
 africa_sf <- st_as_sf(africa) %>% 
   st_transform(epsg_code)
 
-africa_cartogram <- cartogram_cont(africa_sf, "POP2005", itermax=5)
+africa_cartogram <- cartogram_cont(africa_sf, "POP2005", itermax = 7)
 
 # Cartogram
 ggplot() +
   geom_sf(data = africa_cartogram, aes(fill = POP2005/1000000)) +
-  scale_size(
-    range = c(1, 9), 
-    guide = guide_legend(
-      direction = "horizontal", 
-      nrow = 1, 
-      label.position = "bottom")
-  ) +
-  scale_fill_viridis(name="Population (M)", breaks=c(1, 20, 40, 60, 80, 100, 120, 140, 141)) +
-  guides(fill = guide_legend(title = "")) +
-  labs(title = "Población por País en Africa 2005", size = "") +
-  theme(legend.position = "bottom")
-  
+  scale_fill_viridis(breaks=c(1, 20, 40, 60, 80, 100, 120, 140, 141)) +
+  guides(fill = guide_legend(title = "Millones de Habitantes")) +
+  labs(title = "Población por País en Africa 2005", size = "")
+
 # Data: Nigeria
-africa_cartogram[africa_cartogram$NAME == 'Nigeria',]
+africa_cartogram[africa_cartogram$NAME == "Nigeria",]
 
 # Data: African Countries
 africa_cartogram
