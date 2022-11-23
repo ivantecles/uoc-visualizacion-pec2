@@ -55,14 +55,13 @@ ggplot() +
   scale_size(
     range = c(1, 9), 
     guide = guide_legend(
-      direction = "horizontal", 
-      nrow = 1, 
-      label.position = "bottom")
+      direction = "vertical", 
+      nrow = 5,
+      label.position = "right")
   ) +
   scale_fill_gradientn(colours = hcl.colors(5, "Spectral", rev = TRUE, alpha = 0.95)) +
   guides(fill = guide_legend(title = "")) +
-  labs(title = "Aeropuertos por País en la UE", size = "") +
-  theme(legend.position = "bottom")
+  labs(title = "Aeropuertos por País en la UE", size = "")
 
 # Data: Airports by Country in the EU
 labels_n
